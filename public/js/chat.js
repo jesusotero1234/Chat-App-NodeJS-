@@ -54,11 +54,11 @@ socket.on('locationMessage', (url) => {
     console.log(url)
     const html = Mustache.render(locationTemplate, {
         username:url.username,
-        text: url.url,
+        url: url.url,
         createdAt: moment(url.createdAt).format('h:mm:ss a')
     })
     $messages.insertAdjacentHTML('beforeend', html)
-    autoscrol()
+    autoscroll()
 })
 
 socket.on('roomData',({room, users})=>{
@@ -82,7 +82,7 @@ $messageForm.addEventListener('submit', (e) => {
         $messageFormButton.removeAttribute('disabled')
         $messageFormInput.value = ''
         $messageFormInput.focus()
-        if (error) { return console.log(error) }
+        if (error) { return error }
 
         console.log('Message Delivered')
     })
